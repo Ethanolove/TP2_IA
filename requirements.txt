@@ -1,0 +1,7 @@
+flask
+flask-reuploaded
+pandas
+scikit-learn
+numpy
+tensorflow
+gunicorn

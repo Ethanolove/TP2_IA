@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TP2 R602</title>
+    <style>
+        body { font-family: Arial; margin: 40px; line-height: 1.6; }
+        section { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; }
+        .spam { color: red; font-weight: bold; }
+        .non-spam { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Interface IA - TP2</h1>
+
+    <section>
+        <h2>Prediction du taux d'émission de CO2</h2>
+        <form action="/predict_co2" method="post">
+            <input type="number" name="year" placeholder="Année" required>
+            <input type="number" step="0.1" name="engine" placeholder="Moteur" required>
+            <input type="number" name="cylinders" placeholder="Cylindres" required>
+            <input type="number" step="0.1" name="fuel" placeholder="Conso 100km" required>
+            <button type="submit">Prédire</button>
+        </form>
+        {% if co2_text %}<p>{{ co2_text }}</p>{% endif %}
+    </section>
+
+    <section>
+        <h2>Prediction du contenu d'une image</h2>
+        <form action="/predict_img" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" required>
+            <button type="submit">Prédiction</button>
+        </form>
+        {% if img_text %}<p>{{ img_text }}</p>{% endif %}
+    </section>
+
+    <section>
+        <h2>Prediction de spam/non-spam</h2>
+        <form action="/predict_spam" method="post">
+            <textarea name="email" rows="4" cols="50" placeholder="Contenu de l'email"></textarea><br>
+            <button type="submit">Prédire Email</button>
+        </form>
+        {% if spam_text %}
+            <p>Résultat : 
+                {% if spam_text == "Spam" %}
+                    <span class="spam">Spam</span>
+                {% else %}
+                    <span class="non-spam">Non Spam</span>
+                {% endif %}
+            </p>
+        {% endif %}
+    </section>
+</body>
+</html>
